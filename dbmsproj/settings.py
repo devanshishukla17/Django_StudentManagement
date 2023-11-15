@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'dbmsproj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'student',
+        'NAME':'dbmsproj',
         'USER':'root',
         'PASSWORD':'Root123',
         'HOST' :'localhost',

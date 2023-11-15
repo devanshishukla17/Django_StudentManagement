@@ -1,0 +1,67 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<div class="col-mid-14 offset-md-0.5" >
+
+    {% if user.is_authenticated %}
+
+    <h1>Professor Details</h1>
+
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Professor ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone No.</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Email</th>
+            <th scope="col">Date of Joining</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% if professor_records %}
+                {% for record in professor_records %}
+                <tr>
+                    <td>{{record.profid}}</td>
+                    <td>{{record.name}}</td> 
+                    <td>{{record.phoneno}} </td>
+                    <td>{{record.gender}} </td>
+                    <td>{{record.email}} </td>
+                    <td>{{record.dateofjoining}}</td>
+                </tr>
+                {% endfor %}
+            {% endif %}
+            </tr>
+        </tbody>
+    </table>
+    <br/>
+
+
+    {% else %}
+    <h1>LOGIN</h1>
+    <br/>
+    <form method="POST" action="{% url 'home'%}">
+
+        {% csrf_token %}
+        
+            <div class="mb-3">
+            <input type="text" class="form-control" name="username" placeholder='Username' required>
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+            <input type="password" class="form-control" name="password" placeholder="Password" required>
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-secondary">Login</button>
+        
+
+    </form>
+
+    {% endif %}
+
+</div>
+
+
+{% endblock %}
