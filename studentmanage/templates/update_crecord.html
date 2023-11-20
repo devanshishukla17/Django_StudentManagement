@@ -1,0 +1,23 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="col-mid-6 offset-md-3" >
+<h1>UPDATE RECORD</h1>
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{form.as_p}}
+    {% if form.errors %}
+  <div class="alert alert-danger">
+    {{ form.errors }}
+  </div>
+{% endif %}
+
+
+    <button type="submit" class="btn btn-secondary">Update Course</button>
+</form>
+
+
+</div>
+{% endblock %}

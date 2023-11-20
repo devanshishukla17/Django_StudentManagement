@@ -1,0 +1,34 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<div class="card">
+    
+    <div class="card-header">
+        <h5>{{student_record.firstname}} {{student_record.lastname}}</h5>
+    </div>
+    <div class="card-body">
+       
+      <p class="card-text">
+        <strong>Roll Number: </strong>{{student_record.rollno}}</br> 
+        <strong>Phone Number: </strong>{{student_record.phoneno}} </br>
+        <strong>Gender: </strong>{{student_record.gender}} </br>
+        <strong>Email: </strong>{{student_record.email}} </br>
+        <strong>Date of Birth: </strong>{{student_record.dob}} </br>
+        <strong>Date of Admission: </strong>{{student_record.dateofadmission}}</br></p>
+        <a href="{% url 'update_srecord' pk=student_record.rollno %}" class="btn btn-secondary">Update</a>
+        <a href="{% url 'delete_srecord' pk=student_record.rollno %}" class="btn btn-danger" >Delete</a>
+        <a href="{% url 'student'%}" class="btn btn-primary"style="margin-left:950px">Go to Student</a>
+      
+   
+    </div>
+  </div>
+
+  <!--  {{student_record.rollno}}</br> 
+    {{student_record.phoneno}} </br>
+    {{student_record.gender}} </br>
+    {{student_record.email}} </br>
+    {{student_record.dob}} </br>
+    {{student_record.dateofadmission}}</br> -->
+
+{% endblock %}

@@ -8,8 +8,8 @@
 
     <h1>Courses Offered</h1>
 
-    <table class="table table-striped">
-        <thead>
+    <table class="table table-striped table-hover ">
+        <thead class="table-dark">
           <tr>
             <th scope="col">Course ID</th>
             <th scope="col">Course Name</th>
@@ -22,7 +22,7 @@
                 {% if course_records %}
                 {% for record in course_records %}
                 <tr>
-                    <td>{{record.courseid}}</td>
+                    <td><a href="{% url 'crecord' record.courseid%}">{{record.courseid}}</a></td>
                     <td>{{record.coursename}}</td> 
                     <td>{{record.semester}} </td>
                     <td>{{record.startdate}} </td>
@@ -33,6 +33,7 @@
            
         </tbody>
     </table>
+    <a href="{% url 'add_course'%}" class="btn btn-primary"style="margin-left:1000px">Add Course</a>
 
 
     {% else %}

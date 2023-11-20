@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Student,Professor,Courses
 
 class SignUpForm(UserCreationForm):
     email=forms.EmailField(label="",widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Email Address'}))
@@ -28,3 +29,46 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
         self.fields['password2'].label = ''
         self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'	
+
+''' class AddStudentForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = ['rollno', 'firstname', 'lastname', 'phoneno', 'gender', 'email', 'dob', 'dateofadmission']
+ 
+        ''' 
+class AddStudentForm(forms.ModelForm):
+    rollno=forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Roll Number", "class":"form-control"}))
+    firstname=forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"First Name","class":"form-control"}))
+    lastname=forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Last Name","class":"form-control"}))
+    phoneno=forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Phone Number","class":"form-control"}))
+    gender=forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Gender","class":"form-control"}))
+    email=forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Email","class":"form-control"}))
+    dob=forms.DateInput(attrs={"placeholder":"Date Of Birth","class":"form-control"})
+    dateofadmission=forms.DateInput(attrs={"placeholder":"Date of Admission","class":"form-control"})
+
+    class Meta:
+        model=Student
+        fields = ('rollno', 'firstname', 'lastname', 'phoneno', 'gender', 'email', 'dob', 'dateofadmission')
+
+class AddProfessorForm(forms.ModelForm):
+    profid=forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Professor id", "class":"form-control"}))
+    name=forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Name","class":"form-control"}))
+    phoneno=forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Phone Number","class":"form-control"}))
+    email=forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Email","class":"form-control"}))
+    gender=forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Gender","class":"form-control"}))
+    dateofjoining=forms.DateInput(attrs={"placeholder":"Date of Joining","class":"form-control"})
+
+    class Meta:
+        model=Professor
+        fields = ('profid', 'name', 'phoneno', 'email', 'gender', 'dateofjoining')
+
+class AddCourseForm(forms.ModelForm):
+    courseid=forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Course id", "class":"form-control"}))
+    coursename=forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Course Name","class":"form-control"}))
+    semester=forms.IntegerField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Semester Offered","class":"form-control"}))
+    startdate=forms.DateInput(attrs={"placeholder":"Start Date","class":"form-control"})
+    enddate=forms.DateInput(attrs={"placeholder":"End Date","class":"form-control"})
+
+    class Meta:
+        model=Courses
+        fields = ('courseid', 'coursename', 'semester', 'startdate', 'enddate')

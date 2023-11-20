@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<div class="card">
+    
+    <div class="card-header">
+        <h5>{{course_record.coursename}}</h5>
+    </div>
+    <div class="card-body">
+       
+      <p class="card-text">
+        <strong>Course ID: </strong>{{course_record.courseid}}</br> 
+        <strong>Semester Offered: </strong>{{course_record.semester}} </br>
+        <strong>Start Date: </strong>{{course_record.startdate}} </br>
+        <strong>End Date: </strong>{{course_record.enddate}} </br> </br>
+        <a href="{% url 'update_crecord' pk=course_record.courseid %}" class="btn btn-secondary">Update</a>
+        <a href="{% url 'delete_crecord' pk=course_record.courseid %}" class="btn btn-danger" >Delete</a>
+        <a href="{% url 'courses'%}" class="btn btn-primary"style="margin-left:950px">Go to Courses</a>
+      
+   
+    </div>
+  </div>
+
+{% endblock %}

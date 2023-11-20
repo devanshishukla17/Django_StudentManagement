@@ -88,6 +88,9 @@ class Courses(models.Model):
         managed = False
         db_table = 'courses'
 
+    def __str__(self):
+        return f"Course {self.courseid}"
+
 
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
@@ -145,6 +148,9 @@ class Professor(models.Model):
     class Meta:
         managed = False
         db_table = 'professor'
+    
+    def __str__(self):
+        return f"Professor {self.profid}"
 
 
 class Scores(models.Model):
@@ -156,6 +162,9 @@ class Scores(models.Model):
     class Meta:
         managed = False
         db_table = 'scores'
+
+    def __str__(self):
+        return f"Scores - Student: {self.rollno}, Course: {self.courseid}, Exam Type: {self.examtype}, Grade: {self.grade}"
 
 
 class Student(models.Model):
@@ -171,6 +180,9 @@ class Student(models.Model):
     class Meta:
         managed = False
         db_table = 'student'
+
+    def __str__(self):
+        return f"Student {self.rollno}"
 
 
 class Taken(models.Model):

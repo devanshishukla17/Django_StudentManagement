@@ -85,7 +85,7 @@ class Courses(models.Model):
     enddate = models.DateField(db_column='EndDate', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'courses'
 
 
@@ -143,19 +143,21 @@ class Professor(models.Model):
     dateofjoining = models.DateField(db_column='DateOfJoining', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'professor'
 
 
 class Scores(models.Model):
+    sno = models.AutoField(primary_key=True)
     rollno = models.ForeignKey('Student', models.DO_NOTHING, db_column='RollNo', blank=True, null=True)  # Field name made lowercase.
     courseid = models.ForeignKey(Courses, models.DO_NOTHING, db_column='CourseID', blank=True, null=True)  # Field name made lowercase.
     examtype = models.CharField(db_column='ExamType', max_length=20, blank=True, null=True)  # Field name made lowercase.
     grade = models.CharField(db_column='Grade', max_length=5, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'scores'
+    
 
 
 class Student(models.Model):
@@ -169,23 +171,25 @@ class Student(models.Model):
     dateofadmission = models.DateField(db_column='DateOfAdmission', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'student'
 
 
 class Taken(models.Model):
+    sno = models.AutoField(primary_key=True)
     rollno = models.ForeignKey(Student, models.DO_NOTHING, db_column='RollNo', blank=True, null=True)  # Field name made lowercase.
     courseid = models.ForeignKey(Courses, models.DO_NOTHING, db_column='CourseID', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'taken'
 
 
 class Taughtby(models.Model):
+    sno = models.AutoField(primary_key=True)
     profid = models.ForeignKey(Professor, models.DO_NOTHING, db_column='ProfID', blank=True, null=True)  # Field name made lowercase.
     courseid = models.ForeignKey(Courses, models.DO_NOTHING, db_column='CourseID', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'taughtby'

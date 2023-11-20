@@ -1,0 +1,154 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<div class="col-mid-4 offset-md-0.5" >
+
+    {% if user.is_authenticated %}
+<!-- This is a
+     multi-line
+     comment in HTML.
+
+    <h1>Scores</h1>
+
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Score ID</th>
+            <th scope="col">RollNo.</th>
+            <th scope="col">Course ID</th>
+            <th scope="col">Exam Type</th>
+            <th scope="col">Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% if scores %}
+                {% for record in scores %}
+                <tr>
+                    <td>{{record.id}}</td>
+                    <td>{{record.rollno}}</td>
+                    <td>{{record.courseid}}</td> 
+                    <td>{{record.examtype}} </td>
+                    <td>{{record.grade}} </td>
+                
+                </tr>
+                {% endfor %}
+            {% endif %}
+            </tr>
+        </tbody>
+    </table>
+    <br/>
+    <br/> -->
+    <h1>Scores</h1>
+
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Serial No</th>
+            <th scope="col">RollNo.</th>
+            <th scope="col">Course ID</th>
+            <th scope="col">Exam Type</th>
+            <th scope="col">Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% if scores %}
+                {% for record in scores %}
+                <tr>
+                    <td>{{record.sno}}</td>
+                    <td> <a href="{% url 'srecord' pk=record.rollno.rollno%}">{{record.rollno.rollno}}</a></td>
+                    <td> <a href="{% url 'crecord' pk=record.courseid.courseid%}">{{record.courseid.courseid}}</a></td> 
+                    <td>{{record.examtype}} </td>
+                    <td>{{record.grade}} </td>
+                
+                </tr>
+                {% endfor %}
+            {% endif %}
+            </tr>
+        </tbody>
+    </table>
+    <br/>
+
+    <h1>Taken</h1>
+
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Serial No.</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Course Name</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% if taken %}
+                {% for record in taken %}
+                <tr>
+                    <td>{{record.sno}}</td>
+                    <td> <a href="{% url 'srecord' pk=record.rollno.rollno%}">{{record.rollno.firstname}} {{record.rollno.lastname}}</a></td>
+                    <td> <a href="{% url 'crecord' pk=record.courseid.courseid%}">{{record.courseid.coursename}}</a></td>  
+                
+                </tr>
+                {% endfor %}
+            {% endif %}
+            </tr>
+        </tbody>
+    </table>
+    <br/>
+
+    <h1>Taught By</h1>
+
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Serial No</th>
+            <th scope="col">Professor Name</th>
+            <th scope="col">Course Name</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% if taughtby %}
+                {% for record in taughtby %}
+                <tr>
+                    <td>{{record.sno}}</td>
+                    <td> <a href="{% url 'precord' pk=record.profid.profid %}">{{record.profid.name}}</a></td>
+                    <td> <a href="{% url 'crecord' pk=record.courseid.courseid%}">{{record.courseid.coursename}}</a></td>
+                
+                </tr>
+                {% endfor %}
+            {% endif %}
+            </tr>
+        </tbody>
+    </table>
+    <br/>
+
+
+    {% else %}
+    <h1>LOGIN</h1>
+    <br/>
+    <form method="POST" action="{% url 'home'%}">
+
+        {% csrf_token %}
+        
+            <div class="mb-3">
+            <input type="text" class="form-control" name="username" placeholder='Username' required>
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+            <input type="password" class="form-control" name="password" placeholder="Password" required>
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-secondary">Login</button>
+        
+
+    </form>
+
+    {% endif %}
+
+</div>
+
+
+{% endblock %}

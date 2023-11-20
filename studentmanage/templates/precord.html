@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+<div class="card">
+    
+    <div class="card-header">
+        <h5>{{prof_record.name}}</h5>
+    </div>
+    <div class="card-body">
+       
+      <p class="card-text">
+        <strong>Professor ID: </strong>{{prof_record.profid}}</br> 
+        <strong>Phone Number: </strong>{{prof_record.phoneno}} </br>
+        <strong>Email: </strong>{{prof_record.email}} </br>
+        <strong>Gender: </strong>{{prof_record.gender}} </br>
+        <strong>Date of Joining: </strong>{{prof_record.dateofjoining}} </br> </br>
+        <a href="{% url 'update_precord' pk=prof_record.profid %}" class="btn btn-secondary">Update</a>
+        <a href="{% url 'delete_precord' pk=prof_record.profid %}" class="btn btn-danger" >Delete</a>
+        <a href="{% url 'professor'%}" class="btn btn-primary"style="margin-left:950px">Go to Professor</a>
+      
+   
+    </div>
+  </div>
+
+{% endblock %}
