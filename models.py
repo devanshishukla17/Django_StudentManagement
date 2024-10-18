@@ -201,3 +201,145 @@ class Taughtby(models.Model):
     class Meta:
         managed = False
         db_table = 'taughtby'
+
+#new modifications
+
+from django.core.paginator import Paginator
+from django.shortcuts import render
+from .models import Student, Professor, Courses
+
+# View for listing students with pagination
+def student_list(request):
+    student_list = Student.objects.all()
+    paginator = Paginator(student_list, 10)  # Show 10 students per page
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'students/student_list.html', {'page_obj': page_obj})
+
+# View for listing professors with pagination
+def professor_list(request):
+    professor_list = Professor.objects.all()
+    paginator = Paginator(professor_list, 10)  # Show 10 professors per page
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'professors/professor_list.html', {'page_obj': page_obj})
+
+# View for listing courses with pagination
+def course_list(request):
+    course_list = Courses.objects.all()
+    paginator = Paginator(course_list, 10)  # Show 10 courses per page
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'courses/course_list.html', {'page_obj': page_obj})
+
+
+# TEMPLATES
+'''
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>Students</h1>
+    <ul>
+        {% for student in page_obj %}
+            <li>{{ student.firstname }} {{ student.lastname }} - Roll No: {{ student.rollno }}</li>
+        {% endfor %}
+    </ul>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+    <h1>Professors</h1>
+    <ul>
+        {% for professor in page_obj %}
+            <li>{{ professor.name }} - Prof ID: {{ professor.profid }}</li>
+        {% endfor %}
+    </ul>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+    <h1>Courses</h1>
+    <ul>
+        {% for course in page_obj %}
+            <li>{{ course.coursename }} - Course ID: {{ course.courseid }}</li>
+        {% endfor %}
+    </ul>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</body>
+</html>
+'''
+
+#url config
+'''
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('students/', views.student_list, name='student_list'),
+    path('professors/', views.professor_list, name='professor_list'),
+    path('courses/', views.course_list, name='course_list'),
+]
+
+'''
+
+
+
+
